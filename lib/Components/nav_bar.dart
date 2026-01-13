@@ -1,3 +1,3 @@
-// app_bar.dart
+// nav_bar.dart
 
 // Custom AppBar widgets
