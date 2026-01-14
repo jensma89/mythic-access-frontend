@@ -29,7 +29,7 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       style: baseStyle?.copyWith(
         backgroundColor: WidgetStateProperty.all(
-          const Color.fromRGBO(9, 76, 76, 1.0),
+          const Color.fromRGBO(9, 72, 72, 1.0),
         ),
       ),
       child: Text(text),
@@ -56,7 +56,7 @@ class SecondaryButton extends StatelessWidget {
       onPressed: onPressed,
       style: baseStyle?.copyWith(
         backgroundColor: WidgetStateProperty.all(
-          Color.fromRGBO(150, 50, 150, 1.0),
+          Color.fromRGBO(46, 29, 82, 1.0),
         ),
       ),
       child: Text(text),

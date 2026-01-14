@@ -13,11 +13,24 @@ class LoginPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
-          child: PrimaryButton(
-            text: 'Login',
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/start');
-            },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              PrimaryButton(
+                text: 'Login',
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/start');
+                },
+              ),
+
+              SecondaryButton(
+                text: 'Quit test',
+                onPressed: () {
+                  print('Quit test button pressed.');
+                },
+              ),
+            ],
           ),
         ),
       ),

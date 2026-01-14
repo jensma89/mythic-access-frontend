@@ -1,6 +1,7 @@
 // start_page.dart
 
 import 'package:flutter/material.dart';
+import 'package:mythic_access_frontend/components/button.dart';
 import '../components/app_dark_background.dart';
 
 class StartPage extends StatelessWidget {
@@ -16,9 +17,21 @@ class StartPage extends StatelessWidget {
           automaticallyImplyActions: true,
         ),
         body: Center(
-          child: Text(
-            'Welcome to Mythic-Access-DnD',
-            style: Theme.of(context).textTheme.headlineMedium,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Welcome to Mythic-Access-DnD',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 24),
+              AppButton(
+                text: 'Campaigns',
+                onPressed: () {
+                  print('Campaign button pressed.');
+                },
+              ),
+            ],
           ),
         ),
       ),
