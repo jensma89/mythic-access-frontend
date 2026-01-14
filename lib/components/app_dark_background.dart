@@ -10,7 +10,7 @@ class AppDarkBackground extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("lib/Images/backgrounds/background_mythic.png"),
+          image: AssetImage("images/backgrounds/background_mythic.png"),
           fit: BoxFit.cover,
         ),
       ),

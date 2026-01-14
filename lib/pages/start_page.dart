@@ -1,7 +1,7 @@
 // start_page.dart
 
 import 'package:flutter/material.dart';
-import '../Components/app_dark_background.dart';
+import '../components/app_dark_background.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
