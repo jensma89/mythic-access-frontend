@@ -11,7 +11,10 @@ class StartPage extends StatelessWidget {
     return AppDarkBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(title: const Text('Mythic-Access-DnD')),
+        appBar: AppBar(
+          title: const Text('Home'),
+          automaticallyImplyActions: true,
+        ),
         body: Center(
           child: Text(
             'Welcome to Mythic-Access-DnD',

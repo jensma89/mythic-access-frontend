@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import '../components/app_dark_background.dart';
+import '../components/button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -12,11 +13,11 @@ class LoginPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
-          child: ElevatedButton(
+          child: PrimaryButton(
+            text: 'Login',
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/start');
             },
-            child: const Text('Login'),
           ),
         ),
       ),
