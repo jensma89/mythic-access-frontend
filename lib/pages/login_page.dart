@@ -18,6 +18,7 @@ class LoginPage extends StatelessWidget {
             children: [
               PrimaryButton(
                 text: 'Login',
+                icon: Icons.login,
                 onPressed: () {
                   Navigator.pushReplacementNamed(context, '/start');
                 },
@@ -25,9 +26,10 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 10),
               SecondaryButton(
-                text: 'Quit test',
+                text: 'Signup',
+                icon: Icons.app_registration,
                 onPressed: () {
-                  print('Quit test button pressed.');
+                  print('Signup button pressed.');
                 },
               ),
             ],

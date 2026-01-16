@@ -27,6 +27,7 @@ class StartPage extends StatelessWidget {
               const SizedBox(height: 15),
               AppButton(
                 text: 'Campaigns',
+                icon: Icons.wallpaper,
                 onPressed: () {
                   print('Campaign button pressed.');
                 },
@@ -34,6 +35,7 @@ class StartPage extends StatelessWidget {
               const SizedBox(height: 15),
               AppButton(
                 text: 'My Account',
+                icon: Icons.account_circle,
                 onPressed: () {
                   print('My Account button pressed.');
                 },
@@ -41,6 +43,7 @@ class StartPage extends StatelessWidget {
               const SizedBox(height: 15),
               AppButton(
                 text: 'Settings',
+                icon: Icons.settings,
                 onPressed: () {
                   print('Settings button pressed.');
                 },

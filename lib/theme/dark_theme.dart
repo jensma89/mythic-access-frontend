@@ -26,8 +26,7 @@ ThemeData darkTheme = ThemeData(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       textStyle: const TextStyle(fontSize: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      elevation: 2, // Button shadow
-      shadowColor: Color.fromRGBO(255, 255, 255, 0.8),
+      side: const BorderSide(color: Colors.grey, width: 0.2),
     ),
   ),
 

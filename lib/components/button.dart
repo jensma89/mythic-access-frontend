@@ -5,12 +5,29 @@ import 'package:flutter/material.dart';
 class AppButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final IconData? icon;
 
-  const AppButton({super.key, required this.text, required this.onPressed});
+  const AppButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: onPressed, child: Text(text));
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: icon != null
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text(text), Icon(icon, size: 30)],
+              ),
+            )
+          : Text(text),
+    );
   }
 }
 
@@ -18,8 +35,14 @@ class AppButton extends StatelessWidget {
 class PrimaryButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final IconData? icon;
 
-  const PrimaryButton({super.key, required this.text, required this.onPressed});
+  const PrimaryButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +55,15 @@ class PrimaryButton extends StatelessWidget {
           const Color.fromRGBO(9, 72, 72, 1.0),
         ),
       ),
-      child: Text(text),
+      child: icon != null
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text(text), Icon(icon, size: 30)],
+              ),
+            )
+          : Text(text),
     );
   }
 }
@@ -41,11 +72,13 @@ class PrimaryButton extends StatelessWidget {
 class SecondaryButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final IconData? icon;
 
   const SecondaryButton({
     super.key,
     required this.text,
     required this.onPressed,
+    required this.icon,
   });
 
   @override
@@ -59,7 +92,15 @@ class SecondaryButton extends StatelessWidget {
           Color.fromRGBO(46, 29, 82, 1.0),
         ),
       ),
-      child: Text(text),
+      child: icon != null
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Text(text), Icon(icon, size: 30)],
+              ),
+            )
+          : Text(text),
     );
   }
 }
