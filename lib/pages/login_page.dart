@@ -15,7 +15,6 @@ class LoginPage extends StatelessWidget {
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               PrimaryButton(
                 text: 'Login',
@@ -24,6 +23,7 @@ class LoginPage extends StatelessWidget {
                 },
               ),
 
+              const SizedBox(height: 10),
               SecondaryButton(
                 text: 'Quit test',
                 onPressed: () {

@@ -24,11 +24,25 @@ class StartPage extends StatelessWidget {
                 'Welcome to Mythic-Access-DnD',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 15),
               AppButton(
                 text: 'Campaigns',
                 onPressed: () {
                   print('Campaign button pressed.');
+                },
+              ),
+              const SizedBox(height: 15),
+              AppButton(
+                text: 'My Account',
+                onPressed: () {
+                  print('My Account button pressed.');
+                },
+              ),
+              const SizedBox(height: 15),
+              AppButton(
+                text: 'Settings',
+                onPressed: () {
+                  print('Settings button pressed.');
                 },
               ),
             ],
