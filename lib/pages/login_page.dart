@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../components/app_dark_background.dart';
 import '../components/button.dart';
+import '../components/text_field.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -16,6 +17,11 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              LabeledTextField(
+                label: 'Username or email address:',
+                placeholder: 'John20 or john@example.com ...',
+                valueType: ValueType.email,
+              ),
               PrimaryButton(
                 text: 'Login',
                 icon: Icons.login,
