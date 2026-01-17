@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 10),
-              SecondaryButton(
+              PrimaryButton(
                 text: 'Signup',
                 icon: Icons.app_registration,
                 onPressed: () {

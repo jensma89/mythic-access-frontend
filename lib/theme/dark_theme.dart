@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: Colors.transparent,
+
   colorScheme: const ColorScheme.dark(
     primary: Colors.black,
     secondary: Color.fromRGBO(88, 112, 120, 1.0),
@@ -12,9 +13,46 @@ ThemeData darkTheme = ThemeData(
   ),
 
   textTheme: const TextTheme(
-    bodyLarge: TextStyle(fontSize: 20),
-    bodyMedium: TextStyle(fontSize: 18),
-    labelLarge: TextStyle(fontSize: 18),
+    bodyLarge: TextStyle(fontSize: 30),
+    bodyMedium: TextStyle(fontSize: 26),
+    labelLarge: TextStyle(fontSize: 28),
+  ),
+
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: Color.fromRGBO(46, 60, 65, 1.0),
+
+    hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 22),
+
+    labelStyle: const TextStyle(color: Colors.white70, fontSize: 28),
+
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(color: Colors.grey, width: 0.5),
+    ),
+
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(color: Colors.grey, width: 0.5),
+    ),
+
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(
+        color: Color.fromRGBO(88, 112, 120, 1.0),
+        width: 1.2,
+      ),
+    ),
+
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(
+        color: Color.fromRGBO(98, 25, 60, 1.0),
+        width: 1.2,
+      ),
+    ),
   ),
 
   elevatedButtonTheme: ElevatedButtonThemeData(

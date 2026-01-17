@@ -29,35 +29,32 @@ class LabeledTextField extends StatelessWidget {
         return TextInputType.emailAddress;
       case ValueType.string:
         return TextInputType.multiline;
-      default:
-        return TextInputType.text;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-        ),
-        const SizedBox(height: 15),
-        TextField(
-          controller: controller,
-          keyboardType: _getKeyboardType(),
-          maxLines: maxLines,
-          decoration: InputDecoration(
-            hintText: placeholder,
-            border: const OutlineInputBorder(),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 12,
-            ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
-        ),
-      ],
+
+          const SizedBox(height: 5),
+          TextField(
+            controller: controller,
+            keyboardType: _getKeyboardType(),
+            maxLines: maxLines,
+            decoration: InputDecoration(hintText: placeholder),
+          ),
+        ],
+      ),
     );
   }
 }
