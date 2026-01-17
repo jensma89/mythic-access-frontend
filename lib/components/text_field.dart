@@ -2,7 +2,15 @@
 
 import 'package:flutter/material.dart';
 
-enum ValueType { string, int, double, email }
+enum ValueType {
+  string,
+  int,
+  double,
+  email,
+  password,
+  usernameOrEmail,
+  multilineText,
+}
 
 class LabeledTextField extends StatelessWidget {
   final String label;
@@ -25,17 +33,32 @@ class LabeledTextField extends StatelessWidget {
       case ValueType.int:
       case ValueType.double:
         return TextInputType.number;
+
       case ValueType.email:
+      case ValueType.usernameOrEmail:
         return TextInputType.emailAddress;
-      case ValueType.string:
+
+      case ValueType.password:
+        return TextInputType.visiblePassword;
+
+      case ValueType.multilineText:
         return TextInputType.multiline;
+
+      case ValueType.string:
+        return TextInputType.text;
     }
   }
+
+  // check if input is a password
+  bool get _isPassword => valueType == ValueType.password;
+
+  // check input is a multiline text
+  bool get _isMultiLine => valueType == ValueType.multilineText;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -46,11 +69,13 @@ class LabeledTextField extends StatelessWidget {
             ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
 
-          const SizedBox(height: 5),
+          const SizedBox(height: 2),
+
           TextField(
             controller: controller,
             keyboardType: _getKeyboardType(),
-            maxLines: maxLines,
+            maxLines: _isPassword ? 1 : (_isMultiLine ? null : maxLines),
+            obscureText: _isPassword,
             decoration: InputDecoration(hintText: placeholder),
           ),
         ],

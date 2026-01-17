@@ -13,9 +13,9 @@ ThemeData darkTheme = ThemeData(
   ),
 
   textTheme: const TextTheme(
-    bodyLarge: TextStyle(fontSize: 30),
-    bodyMedium: TextStyle(fontSize: 26),
-    labelLarge: TextStyle(fontSize: 28),
+    bodyLarge: TextStyle(fontSize: 26),
+    bodyMedium: TextStyle(fontSize: 24),
+    labelLarge: TextStyle(fontSize: 26),
   ),
 
   inputDecorationTheme: InputDecorationTheme(
@@ -24,7 +24,7 @@ ThemeData darkTheme = ThemeData(
 
     hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 22),
 
-    labelStyle: const TextStyle(color: Colors.white70, fontSize: 28),
+    labelStyle: const TextStyle(color: Colors.white70, fontSize: 26),
 
     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
 
@@ -62,9 +62,9 @@ ThemeData darkTheme = ThemeData(
       minimumSize: const Size(200, 50), // min size of the app button
       maximumSize: const Size(300, 70), // max size of the app button
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      textStyle: const TextStyle(fontSize: 20),
+      textStyle: const TextStyle(fontSize: 30),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      side: const BorderSide(color: Colors.grey, width: 0.2),
+      side: const BorderSide(color: Colors.grey, width: 0.3),
     ),
   ),
 

@@ -14,31 +14,46 @@ class LoginPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              LabeledTextField(
-                label: 'Username or email address:',
-                placeholder: 'John20 or john@example.com ...',
-                valueType: ValueType.email,
-              ),
-              PrimaryButton(
-                text: 'Login',
-                icon: Icons.login,
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/start');
-                },
-              ),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 420),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                LabeledTextField(
+                  label: 'Username or email address:',
+                  placeholder: 'John20 or john@example.com ...',
+                  valueType: ValueType.usernameOrEmail,
+                ),
 
-              const SizedBox(height: 10),
-              PrimaryButton(
-                text: 'Signup',
-                icon: Icons.app_registration,
-                onPressed: () {
-                  print('Signup button pressed.');
-                },
-              ),
-            ],
+                const SizedBox(height: 5),
+
+                LabeledTextField(
+                  label: 'Password:',
+                  placeholder: 'Enter your password...',
+                  valueType: ValueType.password,
+                ),
+
+                const SizedBox(height: 50),
+
+                PrimaryButton(
+                  text: 'Login',
+                  icon: Icons.login,
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/start');
+                  },
+                ),
+
+                const SizedBox(height: 10),
+
+                PrimaryButton(
+                  text: 'Signup',
+                  icon: Icons.app_registration,
+                  onPressed: () {
+                    print('Signup button pressed.');
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
