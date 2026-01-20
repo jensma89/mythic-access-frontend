@@ -12,12 +12,21 @@ ThemeData darkTheme = ThemeData(
     error: Color.fromRGBO(98, 25, 60, 1.0),
   ),
 
+  // Card widget dark theme
+  cardColor: const Color.fromRGBO(30, 34, 36, 1.0),
+
+  dividerColor: const Color.fromRGBO(140, 140, 140, 1.0),
+
+  dividerTheme: const DividerThemeData(thickness: 0.5, space: 16),
+
+  // Font dark design
   textTheme: const TextTheme(
     bodyLarge: TextStyle(fontSize: 26),
     bodyMedium: TextStyle(fontSize: 24),
     labelLarge: TextStyle(fontSize: 26),
   ),
 
+  // Textfield & input dark design
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: Color.fromRGBO(46, 60, 65, 1.0),
@@ -55,6 +64,7 @@ ThemeData darkTheme = ThemeData(
     ),
   ),
 
+  // AppButton dark design
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: Color.fromRGBO(56, 57, 57, 1.0),

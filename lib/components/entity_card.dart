@@ -17,17 +17,34 @@ class EntityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Container(
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(10),
+      constraints: BoxConstraints(
+        minWidth: size.width * 0.9,
+        minHeight: size.height * 0.1,
+      ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        border: Border.all(color: Theme.of(context).dividerColor),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      padding: const EdgeInsets.all(5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title),
+          Text(
+            title,
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+          ),
           const Divider(),
 
           ...content,
 
-          const Divider(thickness: 2),
+          Divider(thickness: Theme.of(context).dividerTheme.thickness! * 2),
 
           footer,
         ],
