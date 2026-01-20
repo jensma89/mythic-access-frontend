@@ -1,5 +1,66 @@
 // button.dart
 import 'package:flutter/material.dart';
+import 'dart:async';
+
+// Helper widget to trigger buttons after delay
+class DelayedPressWrapper extends StatefulWidget {
+  final Widget child;
+  final VoidCallback onPressed;
+  final Duration delay;
+
+  const DelayedPressWrapper({
+    super.key,
+    required this.child,
+    required this.onPressed,
+    this.delay = const Duration(milliseconds: 200),
+  });
+  @override
+  State<DelayedPressWrapper> createState() => _DelayedPressWrapperState();
+}
+
+class _DelayedPressWrapperState extends State<DelayedPressWrapper> {
+  Timer? _timer;
+  bool _pressed = false;
+  bool _fired = false;
+
+  void _fire() {
+    if (_fired) return;
+    _fired = true;
+    widget.onPressed;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+
+      // Adjustments for trigger button delay
+      onTapDown: (_) {
+        _pressed = true;
+        _fired = false;
+        _timer = Timer(widget.delay, () {
+          if (_pressed) _fire();
+        });
+      },
+      onTapUp: (_) {
+        _pressed = false;
+        _timer?.cancel();
+      },
+      onTapCancel: () {
+        _pressed = false;
+        _timer?.cancel();
+      },
+      onLongPress: _fire,
+      child: widget.child,
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+}
 
 // Class for the main button of the app e.g. settings or profile
 class AppButton extends StatelessWidget {
@@ -22,20 +83,23 @@ class AppButton extends StatelessWidget {
       label: semanticsLabel,
       button: true,
       excludeSemantics: true,
-      child: ElevatedButton(
+      child: DelayedPressWrapper(
         onPressed: onPressed,
-        child: icon != null
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(text),
-                    ExcludeSemantics(child: Icon(icon, size: 30)),
-                  ],
-                ),
-              )
-            : Text(text),
+        child: ElevatedButton(
+          onPressed: null,
+          child: icon != null
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(text),
+                      ExcludeSemantics(child: Icon(icon, size: 30)),
+                    ],
+                  ),
+                )
+              : Text(text),
+        ),
       ),
     );
   }
@@ -64,25 +128,28 @@ class PrimaryButton extends StatelessWidget {
       label: semanticsLabel,
       button: true,
       excludeSemantics: true,
-      child: ElevatedButton(
+      child: DelayedPressWrapper(
         onPressed: onPressed,
-        style: baseStyle?.copyWith(
-          backgroundColor: WidgetStateProperty.all(
-            const Color.fromRGBO(9, 72, 72, 1.0),
+        child: ElevatedButton(
+          onPressed: null,
+          style: baseStyle?.copyWith(
+            backgroundColor: WidgetStateProperty.all(
+              const Color.fromRGBO(9, 72, 72, 1.0),
+            ),
           ),
+          child: icon != null
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(text),
+                      ExcludeSemantics(child: Icon(icon, size: 30)),
+                    ],
+                  ),
+                )
+              : Text(text),
         ),
-        child: icon != null
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(text),
-                    ExcludeSemantics(child: Icon(icon, size: 30)),
-                  ],
-                ),
-              )
-            : Text(text),
       ),
     );
   }
@@ -111,25 +178,28 @@ class SecondaryButton extends StatelessWidget {
       label: semanticsLabel,
       button: true,
       excludeSemantics: true,
-      child: ElevatedButton(
+      child: DelayedPressWrapper(
         onPressed: onPressed,
-        style: baseStyle?.copyWith(
-          backgroundColor: WidgetStateProperty.all(
-            Color.fromRGBO(46, 29, 82, 1.0),
+        child: ElevatedButton(
+          onPressed: null,
+          style: baseStyle?.copyWith(
+            backgroundColor: WidgetStateProperty.all(
+              Color.fromRGBO(46, 29, 82, 1.0),
+            ),
           ),
+          child: icon != null
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(text),
+                      ExcludeSemantics(child: Icon(icon, size: 30)),
+                    ],
+                  ),
+                )
+              : Text(text),
         ),
-        child: icon != null
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(text),
-                    ExcludeSemantics(child: Icon(icon, size: 30)),
-                  ],
-                ),
-              )
-            : Text(text),
       ),
     );
   }
