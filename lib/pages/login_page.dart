@@ -21,6 +21,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 LabeledTextField(
                   label: 'Username or email address:',
+                  semanticsLabel: 'Username or email address.',
                   placeholder: 'John20 or john@example.com ...',
                   valueType: ValueType.usernameOrEmail,
                 ),
@@ -29,6 +30,7 @@ class LoginPage extends StatelessWidget {
 
                 LabeledTextField(
                   label: 'Password:',
+                  semanticsLabel: 'Your password.',
                   placeholder: 'Enter your password...',
                   valueType: ValueType.password,
                 ),
@@ -37,6 +39,7 @@ class LoginPage extends StatelessWidget {
 
                 PrimaryButton(
                   text: 'Login',
+                  semanticsLabel: 'Login with your Account.',
                   icon: Icons.login,
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, '/start');
@@ -47,6 +50,7 @@ class LoginPage extends StatelessWidget {
 
                 PrimaryButton(
                   text: 'Signup',
+                  semanticsLabel: 'Signup new account.',
                   icon: Icons.app_registration,
                   onPressed: () {
                     print('Signup button pressed.');

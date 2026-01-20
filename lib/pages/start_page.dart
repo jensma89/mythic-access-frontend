@@ -27,6 +27,7 @@ class StartPage extends StatelessWidget {
               const SizedBox(height: 15),
               AppButton(
                 text: 'Campaigns',
+                semanticsLabel: 'Go to your campaigns.',
                 icon: Icons.wallpaper,
                 onPressed: () {
                   print('Campaign button pressed.');
@@ -34,7 +35,8 @@ class StartPage extends StatelessWidget {
               ),
               const SizedBox(height: 15),
               AppButton(
-                text: 'My Account',
+                text: 'My Profile',
+                semanticsLabel: 'My profile.',
                 icon: Icons.account_circle,
                 onPressed: () {
                   print('My Account button pressed.');
@@ -43,6 +45,7 @@ class StartPage extends StatelessWidget {
               const SizedBox(height: 15),
               AppButton(
                 text: 'Settings',
+                semanticsLabel: 'Settings.',
                 icon: Icons.settings,
                 onPressed: () {
                   print('Settings button pressed.');
