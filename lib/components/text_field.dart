@@ -21,14 +21,14 @@ class LabeledTextField extends StatelessWidget {
   final TextEditingController? controller;
 
   const LabeledTextField({
-    Key? key,
+    super.key,
     required this.label,
     required this.semanticsLabel,
     required this.placeholder,
     required this.valueType,
     this.maxLines = 1,
     this.controller,
-  }) : super(key: key);
+  });
 
   TextInputType _getKeyboardType() {
     switch (valueType) {
