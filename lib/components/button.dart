@@ -1,6 +1,7 @@
 // button.dart
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter/gestures.dart';
 
 // Helper widget to trigger buttons after delay
 class DelayedPressWrapper extends StatefulWidget {
@@ -26,7 +27,7 @@ class _DelayedPressWrapperState extends State<DelayedPressWrapper> {
   void _fire() {
     if (_fired) return;
     _fired = true;
-    widget.onPressed;
+    widget.onPressed();
   }
 
   @override
@@ -35,21 +36,34 @@ class _DelayedPressWrapperState extends State<DelayedPressWrapper> {
       behavior: HitTestBehavior.opaque,
 
       // Adjustments for trigger button delay
-      onTapDown: (_) {
+      onTapDown: (details) {
+        if (details.kind != PointerDeviceKind.touch) return;
+
         _pressed = true;
         _fired = false;
+
+        // Mouse / Keyboard >> direct trigger
+        if (details.kind == PointerDeviceKind.mouse) {
+          _fire();
+          return;
+        }
+
+        // Touch >> delay
         _timer = Timer(widget.delay, () {
           if (_pressed) _fire();
         });
       },
+
       onTapUp: (_) {
         _pressed = false;
         _timer?.cancel();
       },
+
       onTapCancel: () {
         _pressed = false;
         _timer?.cancel();
       },
+
       onLongPress: _fire,
       child: widget.child,
     );
@@ -86,7 +100,7 @@ class AppButton extends StatelessWidget {
       child: DelayedPressWrapper(
         onPressed: onPressed,
         child: ElevatedButton(
-          onPressed: null,
+          onPressed: onPressed,
           child: icon != null
               ? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -131,7 +145,7 @@ class PrimaryButton extends StatelessWidget {
       child: DelayedPressWrapper(
         onPressed: onPressed,
         child: ElevatedButton(
-          onPressed: null,
+          onPressed: onPressed,
           style: baseStyle?.copyWith(
             backgroundColor: WidgetStateProperty.all(
               const Color.fromRGBO(9, 72, 72, 1.0),
@@ -181,7 +195,7 @@ class SecondaryButton extends StatelessWidget {
       child: DelayedPressWrapper(
         onPressed: onPressed,
         child: ElevatedButton(
-          onPressed: null,
+          onPressed: onPressed,
           style: baseStyle?.copyWith(
             backgroundColor: WidgetStateProperty.all(
               Color.fromRGBO(46, 29, 82, 1.0),

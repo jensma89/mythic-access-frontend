@@ -39,7 +39,7 @@ class StartPage extends StatelessWidget {
                 semanticsLabel: 'My profile.',
                 icon: Icons.account_circle,
                 onPressed: () {
-                  print('My Account button pressed.');
+                  print('My My profile button pressed.');
                 },
               ),
               const SizedBox(height: 15),
