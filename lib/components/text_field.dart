@@ -14,6 +14,7 @@ enum ValueType {
 
 class LabeledTextField extends StatelessWidget {
   final String label;
+  final String semanticsLabel;
   final String placeholder;
   final ValueType valueType;
   final int maxLines;
@@ -22,6 +23,7 @@ class LabeledTextField extends StatelessWidget {
   const LabeledTextField({
     Key? key,
     required this.label,
+    required this.semanticsLabel,
     required this.placeholder,
     required this.valueType,
     this.maxLines = 1,
@@ -62,6 +64,7 @@ class LabeledTextField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Visual label
           Text(
             label,
             style: Theme.of(
@@ -71,12 +74,18 @@ class LabeledTextField extends StatelessWidget {
 
           const SizedBox(height: 2),
 
-          TextField(
-            controller: controller,
-            keyboardType: _getKeyboardType(),
-            maxLines: _isPassword ? 1 : (_isMultiLine ? null : maxLines),
-            obscureText: _isPassword,
-            decoration: InputDecoration(hintText: placeholder),
+          // Semantic text field
+          Semantics(
+            label: semanticsLabel,
+            textField: true,
+            excludeSemantics: true,
+            child: TextField(
+              controller: controller,
+              keyboardType: _getKeyboardType(),
+              maxLines: _isPassword ? 1 : (_isMultiLine ? null : maxLines),
+              obscureText: _isPassword,
+              decoration: InputDecoration(hintText: placeholder),
+            ),
           ),
         ],
       ),
