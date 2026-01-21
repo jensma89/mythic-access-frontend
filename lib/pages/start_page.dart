@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:mythic_access_frontend/components/button.dart';
 import '../components/app_dark_background.dart';
+import '../components/nav_bar.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -12,10 +13,38 @@ class StartPage extends StatelessWidget {
     return AppDarkBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: const Text('Home'),
-          automaticallyImplyActions: true,
+
+        // Adaptive navigation bar for desktop/web
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: AdaptiveNavBar(
+            activeItem: NavItem.home,
+            onBack: () {
+              Navigator.of(context).maybePop();
+            },
+            onHome: () {
+              // Already on home
+            },
+            onToggleCard: () {
+              print('Toggle card visibility');
+            },
+          ),
         ),
+
+        // Adaptive navigation bar for mobile
+        bottomNavigationBar: AdaptiveNavBar(
+          activeItem: NavItem.home,
+          onBack: () {
+            Navigator.of(context).maybePop();
+          },
+          onHome: () {
+            // Already on home page
+          },
+          onToggleCard: () {
+            print('Toggle card visibility');
+          },
+        ),
+
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
