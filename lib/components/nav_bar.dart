@@ -5,7 +5,7 @@ import 'button.dart';
 enum NavItem { back, home, cardToggle }
 
 // Class for a adaptive navigation bar, change size by different devices
-class AdaptiveNavBar extends StatelessWidget {
+class AdaptiveNavBar extends StatelessWidget implements PreferredSizeWidget {
   final NavItem? activeItem;
   final VoidCallback onBack;
   final VoidCallback onHome;
@@ -24,31 +24,31 @@ class AdaptiveNavBar extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final isMobile = width < 600;
 
-    return isMobile
-        ? _BottomNavBar(
-            activeItem: activeItem,
-            onBack: onBack,
-            onHome: onHome,
-            onToggleCard: onToggleCard,
-          )
-        : _TopNavBar(
-            activeItem: activeItem,
-            onBack: onBack,
-            onHome: onHome,
-            onToggleCard: onToggleCard,
-          );
+    if (isMobile) {
+      return const SizedBox.shrink();
+    }
+    return _TopNavBar(
+      activeItem: activeItem,
+      onBack: onBack,
+      onHome: onHome,
+      onToggleCard: onToggleCard,
+    );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 // Bottom navigation bar (mobile)
-class _BottomNavBar extends StatelessWidget {
+class AdaptiveBottomNavBar extends StatelessWidget {
   final NavItem? activeItem;
   final VoidCallback onBack;
   final VoidCallback onHome;
   final VoidCallback onToggleCard;
 
-  const _BottomNavBar({
-    required this.activeItem,
+  const AdaptiveBottomNavBar({
+    super.key,
+    this.activeItem,
     required this.onBack,
     required this.onHome,
     required this.onToggleCard,
@@ -56,41 +56,17 @@ class _BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      container: true,
-      label: 'Main Navigation',
-      child: BottomAppBar(
-        color: Theme.of(context).colorScheme.surface,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // Navigation button to go back to previous page
-            _NavButton(
-              icon: Icons.arrow_back,
-              label: 'Back',
-              semanticsLabel: 'Navigate back',
-              onPressed: onBack,
-              active: activeItem == NavItem.back,
-            ),
-            // Navigation button to go to start page
-            _NavButton(
-              icon: Icons.home,
-              label: 'Home',
-              semanticsLabel: 'Go to home screen',
-              onPressed: onHome,
-              active: activeItem == NavItem.home,
-            ),
-            // Navigation button to show/hide the settings card
-            _NavButton(
-              icon: Icons.style,
-              label: 'Card',
-              semanticsLabel: 'Show or hide short setting card',
-              onPressed: onToggleCard,
-              active: activeItem == NavItem.cardToggle,
-            ),
-          ],
-        ),
-      ),
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 600;
+
+    if (!isMobile) {
+      return const SizedBox.shrink();
+    }
+    return _BottomNavBar(
+      activeItem: activeItem,
+      onBack: onBack,
+      onHome: onHome,
+      onToggleCard: onToggleCard,
     );
   }
 }
@@ -137,6 +113,58 @@ class _TopNavBar extends StatelessWidget {
           showLabel: true,
         ),
       ],
+    );
+  }
+}
+
+// Class for the bottom navigation bar (mobile)
+class _BottomNavBar extends StatelessWidget {
+  final NavItem? activeItem;
+  final VoidCallback onBack;
+  final VoidCallback onHome;
+  final VoidCallback onToggleCard;
+
+  const _BottomNavBar({
+    this.activeItem,
+    required this.onBack,
+    required this.onHome,
+    required this.onToggleCard,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      container: true,
+      label: 'Main navigation',
+      child: BottomAppBar(
+        color: Theme.of(context).colorScheme.surface,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _NavButton(
+              icon: Icons.arrow_back,
+              label: 'Back',
+              semanticsLabel: 'Navigate back',
+              onPressed: onBack,
+              active: activeItem == NavItem.back,
+            ),
+            _NavButton(
+              icon: Icons.home,
+              label: 'Home',
+              semanticsLabel: 'Go to home screen',
+              onPressed: onHome,
+              active: activeItem == NavItem.home,
+            ),
+            _NavButton(
+              icon: Icons.style,
+              label: 'Card',
+              semanticsLabel: 'Show or hide short setting card',
+              onPressed: onToggleCard,
+              active: activeItem == NavItem.cardToggle,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

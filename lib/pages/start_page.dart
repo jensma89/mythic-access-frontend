@@ -15,31 +15,20 @@ class StartPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
 
         // Adaptive navigation bar for desktop/web
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: AdaptiveNavBar(
-            activeItem: NavItem.home,
-            onBack: () {
-              Navigator.of(context).maybePop();
-            },
-            onHome: () {
-              // Already on home
-            },
-            onToggleCard: () {
-              print('Toggle card visibility');
-            },
-          ),
+        appBar: AdaptiveNavBar(
+          activeItem: NavItem.home,
+          onBack: () => Navigator.of(context).maybePop(),
+          onHome: () {},
+          onToggleCard: () {
+            print('Toggle card visibility');
+          },
         ),
 
         // Adaptive navigation bar for mobile
-        bottomNavigationBar: AdaptiveNavBar(
+        bottomNavigationBar: AdaptiveBottomNavBar(
           activeItem: NavItem.home,
-          onBack: () {
-            Navigator.of(context).maybePop();
-          },
-          onHome: () {
-            // Already on home page
-          },
+          onBack: () => Navigator.of(context).maybePop(),
+          onHome: () {},
           onToggleCard: () {
             print('Toggle card visibility');
           },
