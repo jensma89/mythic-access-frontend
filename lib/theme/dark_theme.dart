@@ -26,7 +26,7 @@ ThemeData darkTheme = ThemeData(
     labelLarge: TextStyle(fontSize: 26),
   ),
 
-  // Textfield & input dark design
+  // Text field & input dark design
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: Color.fromRGBO(46, 60, 65, 1.0),
@@ -44,14 +44,14 @@ ThemeData darkTheme = ThemeData(
 
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
-      borderSide: const BorderSide(color: Colors.grey, width: 0.5),
+      borderSide: const BorderSide(color: Colors.grey, width: 1.0),
     ),
 
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
       borderSide: const BorderSide(
-        color: Color.fromRGBO(88, 112, 120, 1.0),
-        width: 1.2,
+        color: Color.fromRGBO(206, 154, 17, 1.0),
+        width: 2.0,
       ),
     ),
 
@@ -66,15 +66,33 @@ ThemeData darkTheme = ThemeData(
 
   // AppButton dark design
   elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Color.fromRGBO(56, 57, 57, 1.0),
-      foregroundColor: Colors.white,
-      minimumSize: const Size(200, 50), // min size of the app button
-      maximumSize: const Size(300, 70), // max size of the app button
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      textStyle: const TextStyle(fontSize: 30),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      side: const BorderSide(color: Colors.grey, width: 0.3),
+    style: ButtonStyle(
+      backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+        if (states.contains(WidgetState.pressed)) {
+          return Color.fromRGBO(70, 70, 70, 1.0);
+        }
+        return Color.fromRGBO(56, 57, 57, 1.0);
+      }),
+      foregroundColor: WidgetStateProperty.all(Colors.white),
+      minimumSize: WidgetStateProperty.all(const Size(200, 50)),
+      maximumSize: WidgetStateProperty.all(const Size(300, 70)),
+      padding: WidgetStateProperty.all(
+        const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      ),
+      textStyle: WidgetStateProperty.all(const TextStyle(fontSize: 30)),
+      shape: WidgetStateProperty.resolveWith<OutlinedBorder>((states) {
+        if (states.contains(WidgetState.focused) ||
+            states.contains(WidgetState.hovered)) {
+          return RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+            side: const BorderSide(color: Color(0xFFFFD54F), width: 2.0),
+          );
+        }
+        return RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: const BorderSide(color: Colors.grey, width: 0.3),
+        );
+      }),
     ),
   ),
 

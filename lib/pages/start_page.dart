@@ -1,6 +1,7 @@
 // start_page.dart
 
 import 'package:flutter/material.dart';
+import 'package:mythic_access_frontend/components/adaptive_scaffold.dart';
 import 'package:mythic_access_frontend/components/button.dart';
 import '../components/app_dark_background.dart';
 import '../components/nav_bar.dart';
@@ -11,64 +12,74 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppDarkBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-
-        // Adaptive navigation bar for desktop/web
-        appBar: AdaptiveNavBar(
-          activeItem: NavItem.home,
-          onBack: () => Navigator.of(context).maybePop(),
-          onHome: () {},
-          onToggleCard: () {
-            print('Toggle card visibility');
-          },
-        ),
-
-        // Adaptive navigation bar for mobile
-        bottomNavigationBar: AdaptiveBottomNavBar(
-          activeItem: NavItem.home,
-          onBack: () => Navigator.of(context).maybePop(),
-          onHome: () {},
-          onToggleCard: () {
-            print('Toggle card visibility');
-          },
-        ),
-
+      child: AdaptiveScaffold(
+        activeItem: NavItem.home,
+        homeRedirect: false,
         body: Center(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'Welcome to Mythic-Access-DnD',
-                style: Theme.of(context).textTheme.headlineMedium,
+              // Title - top
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Home',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                      semanticsLabel: 'Your home page',
+                    ),
+                    const SizedBox(width: 12),
+                    ExcludeSemantics(child: Icon(Icons.home, size: 36)),
+                  ],
+                ),
               ),
-              const SizedBox(height: 15),
-              AppButton(
-                text: 'Campaigns',
-                semanticsLabel: 'Go to your campaigns.',
-                icon: Icons.wallpaper,
-                onPressed: () {
-                  print('Campaign button pressed.');
-                },
+
+              // Put the buttons in the middle
+              const Spacer(),
+
+              // Button block
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Campaigns button >> campaigns page
+                  AppButton(
+                    text: 'Campaigns',
+                    semanticsLabel: 'Go to your campaigns.',
+                    icon: Icons.wallpaper,
+                    onPressed: () {
+                      print('Campaign button pressed.');
+                    },
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  // My Profile button >> user me page
+                  AppButton(
+                    text: 'My Profile',
+                    semanticsLabel: 'My profile.',
+                    icon: Icons.account_circle,
+                    onPressed: () {
+                      print('My My profile button pressed.');
+                    },
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  // Settings button >> go to settings menu
+                  AppButton(
+                    text: 'Settings',
+                    semanticsLabel: 'Settings.',
+                    icon: Icons.settings,
+                    onPressed: () {
+                      print('Settings button pressed.');
+                    },
+                  ),
+                ],
               ),
-              const SizedBox(height: 15),
-              AppButton(
-                text: 'My Profile',
-                semanticsLabel: 'My profile.',
-                icon: Icons.account_circle,
-                onPressed: () {
-                  print('My My profile button pressed.');
-                },
-              ),
-              const SizedBox(height: 15),
-              AppButton(
-                text: 'Settings',
-                semanticsLabel: 'Settings.',
-                icon: Icons.settings,
-                onPressed: () {
-                  print('Settings button pressed.');
-                },
-              ),
+              const Spacer(),
             ],
           ),
         ),
