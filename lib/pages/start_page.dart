@@ -3,11 +3,33 @@
 import 'package:flutter/material.dart';
 import 'package:mythic_access_frontend/components/adaptive_scaffold.dart';
 import 'package:mythic_access_frontend/components/button.dart';
+import 'package:mythic_access_frontend/components/short_menu_card.dart';
 import '../components/app_dark_background.dart';
 import '../components/nav_bar.dart';
 
-class StartPage extends StatelessWidget {
+class StartPage extends StatefulWidget {
   const StartPage({super.key});
+
+  @override
+  State<StartPage> createState() => _StartPageState();
+}
+
+class _StartPageState extends State<StartPage> {
+  bool _isShortMenuOpen = false;
+
+  void _toggleShortMenu() {
+    setState(() {
+      _isShortMenuOpen = !_isShortMenuOpen;
+    });
+  }
+
+  void _closeShortMenu() {
+    if (_isShortMenuOpen) {
+      setState(() {
+        _isShortMenuOpen = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,75 +37,81 @@ class StartPage extends StatelessWidget {
       child: AdaptiveScaffold(
         activeItem: NavItem.home,
         homeRedirect: false,
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Title - top
-              SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 38),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Home',
-                        style: Theme.of(context).textTheme.headlineLarge,
-                        semanticsLabel: 'Your home page',
-                      ),
-                      const SizedBox(width: 12),
-                      ExcludeSemantics(child: Icon(Icons.home, size: 36)),
-                    ],
-                  ),
-                ),
-              ),
-
-              // Put the buttons in the middle
-              const Spacer(),
-
-              // Button block
-              Column(
+        onToggleCard: _toggleShortMenu,
+        body: Stack(
+          children: [
+            Center(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Campaigns button >> campaigns page
-                  AppButton(
-                    text: 'Campaigns',
-                    semanticsLabel: 'Go to your campaigns.',
-                    icon: Icons.wallpaper,
-                    onPressed: () {
-                      print('Campaign button pressed.');
-                    },
+                  // Title - top
+                  SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 38),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Home',
+                            style: Theme.of(context).textTheme.headlineLarge,
+                            semanticsLabel: 'Your home page',
+                          ),
+                          const SizedBox(width: 12),
+                          ExcludeSemantics(child: Icon(Icons.home, size: 36)),
+                        ],
+                      ),
+                    ),
                   ),
 
-                  const SizedBox(height: 15),
+                  const Spacer(),
 
-                  // My Profile button >> user me page
-                  AppButton(
-                    text: 'My Profile',
-                    semanticsLabel: 'My profile.',
-                    icon: Icons.account_circle,
-                    onPressed: () {
-                      print('My My profile button pressed.');
-                    },
+                  // Button block
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      AppButton(
+                        text: 'Campaigns',
+                        semanticsLabel: 'Go to your campaigns.',
+                        icon: Icons.wallpaper,
+                        onPressed: () {
+                          print('Campaign button pressed.');
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      AppButton(
+                        text: 'My Profile',
+                        semanticsLabel: 'My profile.',
+                        icon: Icons.account_circle,
+                        onPressed: () {
+                          print('My profile button pressed.');
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      AppButton(
+                        text: 'Settings',
+                        semanticsLabel: 'Settings.',
+                        icon: Icons.settings,
+                        onPressed: _toggleShortMenu,
+                      ),
+                    ],
                   ),
 
-                  const SizedBox(height: 15),
-
-                  // Settings button >> go to settings menu
-                  AppButton(
-                    text: 'Settings',
-                    semanticsLabel: 'Settings.',
-                    icon: Icons.settings,
-                    onPressed: () {
-                      print('Settings button pressed.');
-                    },
-                  ),
+                  const Spacer(),
                 ],
               ),
-              const Spacer(),
-            ],
-          ),
+            ),
+
+            // Short settings card overlay
+            ShortMenuCard(
+              isOpen: _isShortMenuOpen,
+              onClose: _closeShortMenu,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [Text('Quick settings content')],
+              ),
+            ),
+          ],
         ),
       ),
     );
