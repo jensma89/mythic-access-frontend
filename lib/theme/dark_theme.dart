@@ -21,9 +21,9 @@ ThemeData darkTheme = ThemeData(
 
   // Font dark design
   textTheme: const TextTheme(
-    bodyLarge: TextStyle(fontSize: 26),
-    bodyMedium: TextStyle(fontSize: 24),
-    labelLarge: TextStyle(fontSize: 26),
+    bodyLarge: TextStyle(fontSize: 28),
+    bodyMedium: TextStyle(fontSize: 26),
+    labelLarge: TextStyle(fontSize: 30),
   ),
 
   // Text field & input dark design
@@ -31,9 +31,9 @@ ThemeData darkTheme = ThemeData(
     filled: true,
     fillColor: Color.fromRGBO(46, 60, 65, 1.0),
 
-    hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 22),
+    hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 24),
 
-    labelStyle: const TextStyle(color: Colors.white70, fontSize: 26),
+    labelStyle: const TextStyle(color: Colors.white70, fontSize: 30),
 
     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
 

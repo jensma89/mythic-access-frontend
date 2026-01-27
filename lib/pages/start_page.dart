@@ -20,20 +20,22 @@ class StartPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Title - top
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Home',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                      semanticsLabel: 'Your home page',
-                    ),
-                    const SizedBox(width: 12),
-                    ExcludeSemantics(child: Icon(Icons.home, size: 36)),
-                  ],
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 38),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Home',
+                        style: Theme.of(context).textTheme.headlineLarge,
+                        semanticsLabel: 'Your home page',
+                      ),
+                      const SizedBox(width: 12),
+                      ExcludeSemantics(child: Icon(Icons.home, size: 36)),
+                    ],
+                  ),
                 ),
               ),
 

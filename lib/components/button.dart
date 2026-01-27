@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/gestures.dart';
 
+// Default value for milliseconds by press a button
+const Duration kDefaultButtonDelay = Duration(milliseconds: 200);
+
 // Helper widget to trigger buttons after delay
 class DelayedPressWrapper extends StatefulWidget {
   final Widget child;
@@ -13,7 +16,7 @@ class DelayedPressWrapper extends StatefulWidget {
     super.key,
     required this.child,
     required this.onPressed,
-    this.delay = const Duration(milliseconds: 200),
+    this.delay = kDefaultButtonDelay,
   });
   @override
   State<DelayedPressWrapper> createState() => _DelayedPressWrapperState();
@@ -213,6 +216,107 @@ class SecondaryButton extends StatelessWidget {
                   ),
                 )
               : Text(text),
+        ),
+      ),
+    );
+  }
+}
+
+// Collection do define the direction of the triangle as a parameter
+enum TriangleDirection { top, down, left, right }
+
+// Class to change the direction of the button
+class TriangleClipper extends CustomClipper<Path> {
+  final TriangleDirection direction;
+
+  TriangleClipper(this.direction);
+
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+
+    switch (direction) {
+      case TriangleDirection.top:
+        path
+          ..moveTo(size.width / 2, 0)
+          ..lineTo(0, size.height)
+          ..lineTo(size.width, size.height);
+        break;
+
+      case TriangleDirection.down:
+        path
+          ..moveTo(0, 0)
+          ..lineTo(size.width, 0)
+          ..lineTo(size.width / 2, size.height);
+        break;
+
+      case TriangleDirection.left:
+        path
+          ..moveTo(0, size.height / 2)
+          ..lineTo(size.width, 0)
+          ..lineTo(size.width, size.height);
+        break;
+
+      case TriangleDirection.right:
+        path
+          ..moveTo(0, 0)
+          ..lineTo(size.width, size.height / 2)
+          ..lineTo(0, size.height);
+        break;
+    }
+
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
+}
+
+// Class to create a triangle button
+class TriangleButton extends StatelessWidget {
+  final String label;
+  final String semanticsLabel;
+  final VoidCallback onPressed;
+  final Color color;
+  final TriangleDirection direction;
+  final double size;
+
+  const TriangleButton({
+    super.key,
+    required this.label,
+    required this.semanticsLabel,
+    required this.onPressed,
+    required this.color,
+    this.direction = TriangleDirection.top,
+    this.size = 80,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: semanticsLabel,
+      button: true,
+      excludeSemantics: true,
+      child: DelayedPressWrapper(
+        onPressed: onPressed,
+        child: ClipPath(
+          clipper: TriangleClipper(direction),
+          child: Container(
+            width: size,
+            height: size,
+            color: color,
+            alignment: Alignment.center,
+            child: ExcludeSemantics(
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                style: Theme.of(
+                  context,
+                ).textTheme.labelLarge?.copyWith(color: Colors.white),
+              ),
+            ),
+          ),
         ),
       ),
     );
