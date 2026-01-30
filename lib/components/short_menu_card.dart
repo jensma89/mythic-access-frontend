@@ -120,6 +120,8 @@ class _ShortMenuCardState extends State<ShortMenuCard>
                           child: Padding(
                             padding: const EdgeInsets.all(16),
                             child: widget.child,
+
+                            // buttons and textfields ?
                           ),
                         ),
                       ],
@@ -144,18 +146,24 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 56,
-      child: Row(
-        children: [
-          const SizedBox(width: 16),
-          Text('Quick Settings', style: Theme.of(context).textTheme.titleLarge),
-          const Spacer(),
-          if (onClose != null)
-            IconButton(
-              tooltip: 'Close settings',
-              icon: const Icon(Icons.close),
-              onPressed: onClose,
+      child: Semantics(
+        child: Row(
+          children: [
+            const SizedBox(width: 16),
+            Text(
+              'Quick Settings',
+              semanticsLabel: 'Quick settings menu',
+              style: Theme.of(context).textTheme.titleLarge,
             ),
-        ],
+            const Spacer(),
+            if (onClose != null)
+              IconButton(
+                tooltip: 'Close settings',
+                icon: const Icon(Icons.close),
+                onPressed: onClose,
+              ),
+          ],
+        ),
       ),
     );
   }

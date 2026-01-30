@@ -218,7 +218,15 @@ class _NavButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
               children: [
-                Icon(icon, color: color, size: 34),
+                Container(
+                  margin: const EdgeInsets.all(1),
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.white24, width: 1),
+                  ),
+                  child: Icon(icon, color: color, size: 38),
+                ),
                 if (showLabel) ...[const SizedBox(width: 8), Text(label)],
               ],
             ),
