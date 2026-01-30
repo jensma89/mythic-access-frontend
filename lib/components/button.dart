@@ -40,31 +40,29 @@ class _DelayedPressWrapperState extends State<DelayedPressWrapper> {
 
       // Adjustments for trigger button delay
       onTapDown: (details) {
-        if (details.kind != PointerDeviceKind.touch) return;
-
         _pressed = true;
         _fired = false;
 
-        // Mouse / Keyboard >> direct trigger
-        if (details.kind == PointerDeviceKind.mouse) {
-          _fire();
+        // Touch >> delay for accessibility (fire after holding)
+        if (details.kind == PointerDeviceKind.touch) {
+          _timer = Timer(widget.delay, _fire);
           return;
         }
 
-        // Touch >> delay
-        _timer = Timer(widget.delay, () {
-          if (_pressed) _fire();
-        });
+        // Mouse / Keyboard >> direct trigger
+        _fire();
       },
 
       onTapUp: (_) {
         _pressed = false;
         _timer?.cancel();
+        _timer = null;
       },
 
       onTapCancel: () {
         _pressed = false;
         _timer?.cancel();
+        _timer = null;
       },
 
       onLongPress: _fire,

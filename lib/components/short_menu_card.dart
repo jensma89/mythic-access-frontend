@@ -56,6 +56,9 @@ class _ShortMenuCardState extends State<ShortMenuCard>
       curve: Curves.easeOut,
       reverseCurve: Curves.easeIn,
     );
+    if (widget.isOpen) {
+      _controller.value = 1.0;
+    }
   }
 
   @override

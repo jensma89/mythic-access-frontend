@@ -5,12 +5,12 @@ import 'nav_bar.dart';
 // Helper class for easier calls of navigation bar
 class AdaptiveScaffold extends StatelessWidget {
   final Widget body;
-
   final NavItem? activeItem;
   final bool homeRedirect; // If true, home button redirect to start page
   final VoidCallback? onHome; // Optional override for home button
   final VoidCallback? onBack;
   final VoidCallback? onToggleCard;
+  final bool isCardOpen;
   final Color backgroundColor;
 
   const AdaptiveScaffold({
@@ -21,6 +21,7 @@ class AdaptiveScaffold extends StatelessWidget {
     this.onHome,
     this.onBack,
     this.onToggleCard,
+    this.isCardOpen = false,
     this.backgroundColor = Colors.transparent,
   });
   void _handleHome(BuildContext context) {
@@ -45,6 +46,7 @@ class AdaptiveScaffold extends StatelessWidget {
         onBack: onBack ?? () => Navigator.of(context).maybePop(),
         onHome: () => _handleHome(context),
         onToggleCard: onToggleCard ?? () {},
+        isCardOpen: isCardOpen,
       ),
 
       // Mobile
@@ -53,6 +55,7 @@ class AdaptiveScaffold extends StatelessWidget {
         onBack: onBack ?? () => Navigator.of(context).maybePop(),
         onHome: () => _handleHome(context),
         onToggleCard: onToggleCard ?? () {},
+        isCardOpen: isCardOpen,
       ),
       body: body,
     );

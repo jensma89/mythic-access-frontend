@@ -38,6 +38,7 @@ class _StartPageState extends State<StartPage> {
         activeItem: NavItem.home,
         homeRedirect: false,
         onToggleCard: _toggleShortMenu,
+        isCardOpen: _isShortMenuOpen,
         body: Stack(
           children: [
             Center(
@@ -70,6 +71,7 @@ class _StartPageState extends State<StartPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      // Button for campaign page
                       AppButton(
                         text: 'Campaigns',
                         semanticsLabel: 'Go to your campaigns.',
@@ -79,6 +81,8 @@ class _StartPageState extends State<StartPage> {
                         },
                       ),
                       const SizedBox(height: 15),
+
+                      // Profile button (user me)
                       AppButton(
                         text: 'My Profile',
                         semanticsLabel: 'My profile.',
@@ -88,11 +92,13 @@ class _StartPageState extends State<StartPage> {
                         },
                       ),
                       const SizedBox(height: 15),
+
+                      // Button for settings page
                       AppButton(
                         text: 'Settings',
                         semanticsLabel: 'Settings.',
                         icon: Icons.settings,
-                        onPressed: _toggleShortMenu,
+                        onPressed: () {},
                       ),
                     ],
                   ),

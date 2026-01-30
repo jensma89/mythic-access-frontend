@@ -10,6 +10,7 @@ class AdaptiveNavBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onBack;
   final VoidCallback onHome;
   final VoidCallback onToggleCard;
+  final bool isCardOpen;
 
   const AdaptiveNavBar({
     super.key,
@@ -17,6 +18,7 @@ class AdaptiveNavBar extends StatelessWidget implements PreferredSizeWidget {
     required this.onBack,
     required this.onHome,
     required this.onToggleCard,
+    this.isCardOpen = false,
   });
 
   @override
@@ -32,6 +34,7 @@ class AdaptiveNavBar extends StatelessWidget implements PreferredSizeWidget {
       onBack: onBack,
       onHome: onHome,
       onToggleCard: onToggleCard,
+      isCardOpen: isCardOpen,
     );
   }
 
@@ -45,6 +48,7 @@ class AdaptiveBottomNavBar extends StatelessWidget {
   final VoidCallback onBack;
   final VoidCallback onHome;
   final VoidCallback onToggleCard;
+  final bool isCardOpen;
 
   const AdaptiveBottomNavBar({
     super.key,
@@ -52,6 +56,7 @@ class AdaptiveBottomNavBar extends StatelessWidget {
     required this.onBack,
     required this.onHome,
     required this.onToggleCard,
+    this.isCardOpen = false,
   });
 
   @override
@@ -67,6 +72,7 @@ class AdaptiveBottomNavBar extends StatelessWidget {
       onBack: onBack,
       onHome: onHome,
       onToggleCard: onToggleCard,
+      isCardOpen: isCardOpen,
     );
   }
 }
@@ -77,12 +83,14 @@ class _TopNavBar extends StatelessWidget {
   final VoidCallback onBack;
   final VoidCallback onHome;
   final VoidCallback onToggleCard;
+  final bool isCardOpen;
 
   const _TopNavBar({
     required this.activeItem,
     required this.onBack,
     required this.onHome,
     required this.onToggleCard,
+    required this.isCardOpen,
   });
 
   @override
@@ -90,6 +98,7 @@ class _TopNavBar extends StatelessWidget {
     return AppBar(
       title: const Text('Mythic Access'),
       actions: [
+        // Back button
         _NavButton(
           icon: Icons.arrow_back,
           label: 'Back',
@@ -97,6 +106,8 @@ class _TopNavBar extends StatelessWidget {
           onPressed: onBack,
           showLabel: true,
         ),
+
+        // Button for start page
         _NavButton(
           icon: Icons.home,
           label: 'Home',
@@ -104,6 +115,7 @@ class _TopNavBar extends StatelessWidget {
           onPressed: onHome,
           showLabel: true,
         ),
+
         // Navigation button to show/hide the settings card
         _NavButton(
           icon: Icons.style,
@@ -111,6 +123,7 @@ class _TopNavBar extends StatelessWidget {
           semanticsLabel: 'Show or hide short setting card',
           onPressed: onToggleCard,
           showLabel: true,
+          active: isCardOpen,
         ),
       ],
     );
@@ -123,12 +136,14 @@ class _BottomNavBar extends StatelessWidget {
   final VoidCallback onBack;
   final VoidCallback onHome;
   final VoidCallback onToggleCard;
+  final bool isCardOpen;
 
   const _BottomNavBar({
     this.activeItem,
     required this.onBack,
     required this.onHome,
     required this.onToggleCard,
+    required this.isCardOpen,
   });
 
   @override
@@ -160,7 +175,7 @@ class _BottomNavBar extends StatelessWidget {
               label: 'Card',
               semanticsLabel: 'Show or hide short setting card',
               onPressed: onToggleCard,
-              active: activeItem == NavItem.cardToggle,
+              active: isCardOpen,
             ),
           ],
         ),
@@ -203,7 +218,7 @@ class _NavButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
               children: [
-                Icon(icon, color: color, size: 28),
+                Icon(icon, color: color, size: 34),
                 if (showLabel) ...[const SizedBox(width: 8), Text(label)],
               ],
             ),
