@@ -226,8 +226,9 @@ enum TriangleDirection { top, down, left, right }
 // Class to change the direction of the button
 class TriangleClipper extends CustomClipper<Path> {
   final TriangleDirection direction;
+  final double inset;
 
-  TriangleClipper(this.direction);
+  TriangleClipper(this.direction, {this.inset = 5.0});
 
   @override
   Path getClip(Size size) {
@@ -236,30 +237,30 @@ class TriangleClipper extends CustomClipper<Path> {
     switch (direction) {
       case TriangleDirection.top:
         path
-          ..moveTo(size.width / 2, 0)
-          ..lineTo(0, size.height)
-          ..lineTo(size.width, size.height);
+          ..moveTo(size.width / 2, inset)
+          ..lineTo(inset, size.height - inset)
+          ..lineTo(size.width - inset, size.height - inset);
         break;
 
       case TriangleDirection.down:
         path
-          ..moveTo(0, 0)
-          ..lineTo(size.width, 0)
-          ..lineTo(size.width / 2, size.height);
+          ..moveTo(inset, inset)
+          ..lineTo(size.width - inset, inset)
+          ..lineTo(size.width / 2, size.height - inset);
         break;
 
       case TriangleDirection.left:
         path
-          ..moveTo(0, size.height / 2)
-          ..lineTo(size.width, 0)
-          ..lineTo(size.width, size.height);
+          ..moveTo(inset, size.height / 2)
+          ..lineTo(size.width - inset, inset)
+          ..lineTo(size.width - inset, size.height - inset);
         break;
 
       case TriangleDirection.right:
         path
-          ..moveTo(0, 0)
-          ..lineTo(size.width, size.height / 2)
-          ..lineTo(0, size.height);
+          ..moveTo(inset, inset)
+          ..lineTo(size.width - inset, size.height / 2)
+          ..lineTo(inset, size.height - inset);
         break;
     }
 
@@ -271,14 +272,78 @@ class TriangleClipper extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
 
+// Custom painter to draw triangle border
+class _TriangleBorderPainter extends CustomPainter {
+  final TriangleDirection direction;
+  final Color borderColor;
+  final double borderWidth;
+  final double inset;
+
+  _TriangleBorderPainter({
+    required this.direction,
+    required this.borderColor,
+    this.borderWidth = 1.5,
+    this.inset = 5.0,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = borderColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = borderWidth
+      ..strokeJoin = StrokeJoin.round;
+
+    final path = Path();
+
+    switch (direction) {
+      case TriangleDirection.top:
+        path
+          ..moveTo(size.width / 2, inset)
+          ..lineTo(inset, size.height - inset)
+          ..lineTo(size.width - inset, size.height - inset);
+        break;
+
+      case TriangleDirection.down:
+        path
+          ..moveTo(inset, inset)
+          ..lineTo(size.width - inset, inset)
+          ..lineTo(size.width / 2, size.height - inset);
+        break;
+
+      case TriangleDirection.left:
+        path
+          ..moveTo(inset, size.height / 2)
+          ..lineTo(size.width - inset, inset)
+          ..lineTo(size.width - inset, size.height - inset);
+        break;
+
+      case TriangleDirection.right:
+        path
+          ..moveTo(inset, inset)
+          ..lineTo(size.width - inset, size.height / 2)
+          ..lineTo(inset, size.height - inset);
+        break;
+    }
+
+    path.close();
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
 // Class to create a triangle button
 class TriangleButton extends StatelessWidget {
   final String label;
   final String semanticsLabel;
   final VoidCallback onPressed;
   final Color color;
+  final Color? borderColor;
   final TriangleDirection direction;
   final double size;
+  final FocusNode? focusNode;
 
   const TriangleButton({
     super.key,
@@ -286,9 +351,25 @@ class TriangleButton extends StatelessWidget {
     required this.semanticsLabel,
     required this.onPressed,
     required this.color,
+    this.borderColor,
     this.direction = TriangleDirection.top,
     this.size = 80,
+    this.focusNode,
   });
+
+  // Calculate text offset to center in the triangle's visual center
+  Alignment _getTextAlignment() {
+    switch (direction) {
+      case TriangleDirection.left:
+        return const Alignment(0.35, 0.0);
+      case TriangleDirection.right:
+        return const Alignment(-0.35, 0.0);
+      case TriangleDirection.top:
+        return const Alignment(0.0, 0.35);
+      case TriangleDirection.down:
+        return const Alignment(0.0, -0.35);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -296,25 +377,45 @@ class TriangleButton extends StatelessWidget {
       label: semanticsLabel,
       button: true,
       excludeSemantics: true,
-      child: DelayedPressWrapper(
-        onPressed: onPressed,
-        child: ClipPath(
-          clipper: TriangleClipper(direction),
-          child: Container(
-            width: size,
-            height: size,
-            color: color,
-            alignment: Alignment.center,
-            child: ExcludeSemantics(
-              child: Text(
-                label,
-                textAlign: TextAlign.center,
-                style: Theme.of(
-                  context,
-                ).textTheme.labelLarge?.copyWith(color: Colors.white),
+      child: Focus(
+        focusNode: focusNode,
+        child: Builder(
+          builder: (context) {
+            final hasFocus = Focus.of(context).hasFocus;
+            return DelayedPressWrapper(
+              onPressed: onPressed,
+              child: CustomPaint(
+                foregroundPainter: borderColor != null
+                    ? _TriangleBorderPainter(
+                        direction: direction,
+                        borderColor: hasFocus
+                            ? Theme.of(context).colorScheme.primary
+                            : borderColor!,
+                        borderWidth: hasFocus ? 3.0 : 1.5,
+                      )
+                    : null,
+                child: ClipPath(
+                  clipper: TriangleClipper(direction),
+                  child: Container(
+                    width: size,
+                    height: size,
+                    color: color,
+                    alignment: _getTextAlignment(),
+                    child: ExcludeSemantics(
+                      child: Text(
+                        label,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

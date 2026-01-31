@@ -13,7 +13,7 @@ ThemeData darkTheme = ThemeData(
   ),
 
   // Card widget dark theme
-  cardColor: const Color.fromRGBO(30, 34, 36, 1.0),
+  cardColor: Colors.black,
 
   dividerColor: const Color.fromRGBO(140, 140, 140, 1.0),
 
