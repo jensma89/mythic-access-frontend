@@ -19,10 +19,11 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                // Text field for username or email adress
                 CustomTextField(
                   label: 'Username or email address:',
                   semanticsLabel: 'Username or email address.',
-                  placeholder: 'John20 or john@example.com ...',
+                  placeholder: 'User123 or user@example.com ...',
                   valueType: ValueType.usernameOrEmail,
                 ),
 
@@ -39,7 +40,7 @@ class LoginPage extends StatelessWidget {
 
                 PrimaryButton(
                   text: 'Login',
-                  semanticsLabel: 'Login with your Account.',
+                  semanticsLabel: 'Login with your account.',
                   icon: Icons.login,
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, '/start');
@@ -53,7 +54,7 @@ class LoginPage extends StatelessWidget {
                   semanticsLabel: 'Signup new account.',
                   icon: Icons.app_registration,
                   onPressed: () {
-                    print('Signup button pressed.');
+                    Navigator.pushReplacementNamed(context, '/signup');
                   },
                 ),
               ],
