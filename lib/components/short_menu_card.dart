@@ -136,12 +136,32 @@ class _ShortMenuCardState extends State<ShortMenuCard>
                     maxWidth: 720, // Desktop / Web friendly
                     maxHeight: cardHeight,
                   ),
-                  child: Card(
-                    elevation: 6,
-                    clipBehavior: Clip.antiAlias,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: _primaryButtonColor,
+                        width: 2,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: _secondaryButtonColor.withAlpha(100),
+                          blurRadius: 8,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: Card(
+                      margin: EdgeInsets.zero,
+                      elevation: 0,
+                      clipBehavior: Clip.antiAlias,
+                      color: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
                         // Header (optional but recommended)
                         _Header(onClose: widget.onClose),
 
@@ -207,6 +227,7 @@ class _ShortMenuCardState extends State<ShortMenuCard>
                       ],
                     ),
                   ),
+                ),
                 ),
               ),
             ),

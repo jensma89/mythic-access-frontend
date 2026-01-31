@@ -334,6 +334,9 @@ class _TriangleBorderPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
+// Standard focus highlight color for accessibility
+const Color _focusHighlightColor = Color.fromRGBO(255, 152, 0, 1.0); // Orange
+
 // Class to create a triangle button
 class TriangleButton extends StatelessWidget {
   final String label;
@@ -377,23 +380,38 @@ class TriangleButton extends StatelessWidget {
       label: semanticsLabel,
       button: true,
       excludeSemantics: true,
-      child: Focus(
+      child: FocusableActionDetector(
         focusNode: focusNode,
+        autofocus: false,
+        actions: {
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) => onPressed(),
+          ),
+          ButtonActivateIntent: CallbackAction<ButtonActivateIntent>(
+            onInvoke: (_) => onPressed(),
+          ),
+        },
         child: Builder(
           builder: (context) {
             final hasFocus = Focus.of(context).hasFocus;
-            return DelayedPressWrapper(
-              onPressed: onPressed,
+            return GestureDetector(
+              onTap: onPressed,
               child: CustomPaint(
                 foregroundPainter: borderColor != null
                     ? _TriangleBorderPainter(
                         direction: direction,
                         borderColor: hasFocus
-                            ? Theme.of(context).colorScheme.primary
+                            ? _focusHighlightColor
                             : borderColor!,
-                        borderWidth: hasFocus ? 3.0 : 1.5,
+                        borderWidth: hasFocus ? 3.5 : 1.5,
                       )
-                    : null,
+                    : (hasFocus
+                        ? _TriangleBorderPainter(
+                            direction: direction,
+                            borderColor: _focusHighlightColor,
+                            borderWidth: 3.5,
+                          )
+                        : null),
                 child: ClipPath(
                   clipper: TriangleClipper(direction),
                   child: Container(
