@@ -12,7 +12,7 @@ enum ValueType {
   multilineText,
 }
 
-class LabeledTextField extends StatelessWidget {
+class Text extends StatelessWidget {
   final String label;
   final String semanticsLabel;
   final String placeholder;
@@ -20,7 +20,7 @@ class LabeledTextField extends StatelessWidget {
   final int maxLines;
   final TextEditingController? controller;
 
-  const LabeledTextField({
+  const Text({
     super.key,
     required this.label,
     required this.semanticsLabel,

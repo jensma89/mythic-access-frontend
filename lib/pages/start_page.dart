@@ -112,10 +112,7 @@ class _StartPageState extends State<StartPage> {
             ShortMenuCard(
               isOpen: _isShortMenuOpen,
               onClose: _closeShortMenu,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [Text('Quick settings content')],
-              ),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start),
             ),
           ],
         ),

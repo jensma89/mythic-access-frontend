@@ -1,5 +1,7 @@
 // short_menu_card.dart
 import 'package:flutter/material.dart';
+import 'button.dart';
+import 'text_field.dart';
 
 // Class for the short menu widget (fast settings for accessibility)
 class ShortMenuCard extends StatefulWidget {
@@ -119,9 +121,76 @@ class _ShortMenuCardState extends State<ShortMenuCard>
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(16),
-                            child: widget.child,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                // Font size settings
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      // Minus button
+                                      TriangleButton(
+                                        label: '-',
+                                        semanticsLabel: 'Decrease text size',
+                                        onPressed: () {}, // TODO
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.secondary,
+                                        direction: TriangleDirection.left,
+                                      ),
 
-                            // buttons and textfields ?
+                                      const SizedBox(width: 30),
+
+                                      // Text with size value
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 8
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(8),
+                                          border: Border.all(
+                                            color: Theme.of(context)
+                                                .colorScheme.outline
+                                                .withAlpha(60),
+                                          ),
+                                          color: Theme.of(context)
+                                              .colorScheme.surface
+                                              .withAlpha(40),
+                                        ),
+                                        child: Semantics(
+                                          label: 'Current text size: 38',
+                                          // change value later
+                                          child: Text(
+                                            '38',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium?.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+
+                                      const SizedBox(width: 30),
+
+                                      // Plus button
+                                      TriangleButton(
+                                        label: '+',
+                                        semanticsLabel: 'Increase text size',
+                                        onPressed: () {}, // TODO
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.primary,
+                                        direction: TriangleDirection.right,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

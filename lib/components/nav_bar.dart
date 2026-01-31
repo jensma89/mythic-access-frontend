@@ -173,7 +173,7 @@ class _BottomNavBar extends StatelessWidget {
             _NavButton(
               icon: Icons.style,
               label: 'Card',
-              semanticsLabel: 'Show or hide short setting card',
+              semanticsLabel: 'Show or hide quick settings menu',
               onPressed: onToggleCard,
               active: isCardOpen,
             ),
@@ -222,6 +222,7 @@ class _NavButton extends StatelessWidget {
                   margin: const EdgeInsets.all(1),
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
                     color: Colors.transparent,
                     border: Border.all(color: Colors.white24, width: 1),
                   ),

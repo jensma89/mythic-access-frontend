@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                LabeledTextField(
+                Text(
                   label: 'Username or email address:',
                   semanticsLabel: 'Username or email address.',
                   placeholder: 'John20 or john@example.com ...',
@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 5),
 
-                LabeledTextField(
+                Text(
                   label: 'Password:',
                   semanticsLabel: 'Your password.',
                   placeholder: 'Enter your password...',
