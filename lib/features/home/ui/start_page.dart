@@ -6,6 +6,7 @@ import 'package:mythic_access_frontend/core/components/button.dart';
 import '../../../core/components/app_dark_background.dart';
 import '../../../core/components/nav_bar.dart';
 
+// Class for the start (home) page
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
 
