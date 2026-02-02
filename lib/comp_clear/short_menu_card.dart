@@ -1,6 +1,6 @@
 // short_menu_card.dart
 import 'package:flutter/material.dart';
-import 'button.dart';
+import '../core/components/button.dart';
 
 // Class for the short menu widget (fast settings for accessibility)
 class ShortMenuCard extends StatefulWidget {
@@ -139,10 +139,7 @@ class _ShortMenuCardState extends State<ShortMenuCard>
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: _primaryButtonColor,
-                        width: 2,
-                      ),
+                      border: Border.all(color: _primaryButtonColor, width: 2),
                       boxShadow: [
                         BoxShadow(
                           color: _secondaryButtonColor.withAlpha(100),
@@ -162,72 +159,74 @@ class _ShortMenuCardState extends State<ShortMenuCard>
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                        // Header (optional but recommended)
-                        _Header(onClose: widget.onClose),
+                          // Header (optional but recommended)
+                          _Header(onClose: widget.onClose),
 
-                        const Divider(height: 1),
+                          const Divider(height: 1),
 
-                        // Content area
-                        Flexible(
-                          child: FocusScope(
-                            node: _focusScopeNode,
-                            child: SingleChildScrollView(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: contentPadding + 8,
-                                  vertical: contentPadding + 12,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    // Text size settings
-                                    _SettingsRow(
-                                      title: 'Text Size',
-                                      value: '16',
-                                      semanticsLabel: 'Current text size: 16',
-                                      decreaseLabel: 'Decrease text size',
-                                      increaseLabel: 'Increase text size',
-                                      onDecrease: () {}, // TODO
-                                      onIncrease: () {}, // TODO
-                                      firstFocusNode: _firstButtonFocus,
-                                    ),
+                          // Content area
+                          Flexible(
+                            child: FocusScope(
+                              node: _focusScopeNode,
+                              child: SingleChildScrollView(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: contentPadding + 8,
+                                    vertical: contentPadding + 12,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      // Text size settings
+                                      _SettingsRow(
+                                        title: 'Text Size',
+                                        value: '16',
+                                        semanticsLabel: 'Current text size: 16',
+                                        decreaseLabel: 'Decrease text size',
+                                        increaseLabel: 'Increase text size',
+                                        onDecrease: () {}, // TODO
+                                        onIncrease: () {}, // TODO
+                                        firstFocusNode: _firstButtonFocus,
+                                      ),
 
-                                    SizedBox(height: rowSpacing + 8),
+                                      SizedBox(height: rowSpacing + 8),
 
-                                    // Contrast settings
-                                    _SettingsRow(
-                                      title: 'Contrast',
-                                      value: '50',
-                                      semanticsLabel: 'Current contrast: 50',
-                                      decreaseLabel: 'Decrease contrast',
-                                      increaseLabel: 'Increase contrast',
-                                      onDecrease: () {}, // TODO
-                                      onIncrease: () {}, // TODO
-                                    ),
+                                      // Contrast settings
+                                      _SettingsRow(
+                                        title: 'Contrast',
+                                        value: '50',
+                                        semanticsLabel: 'Current contrast: 50',
+                                        decreaseLabel: 'Decrease contrast',
+                                        increaseLabel: 'Increase contrast',
+                                        onDecrease: () {}, // TODO
+                                        onIncrease: () {}, // TODO
+                                      ),
 
-                                    SizedBox(height: rowSpacing + 8),
+                                      SizedBox(height: rowSpacing + 8),
 
-                                    // Color settings
-                                    _SettingsRow(
-                                      title: 'Color',
-                                      value: '1',
-                                      semanticsLabel: 'Current color scheme: 1',
-                                      decreaseLabel: 'Previous color scheme',
-                                      increaseLabel: 'Next color scheme',
-                                      onDecrease: () {}, // TODO
-                                      onIncrease: () {}, // TODO
-                                    ),
-                                  ],
+                                      // Color settings
+                                      _SettingsRow(
+                                        title: 'Color',
+                                        value: '1',
+                                        semanticsLabel:
+                                            'Current color scheme: 1',
+                                        decreaseLabel: 'Previous color scheme',
+                                        increaseLabel: 'Next color scheme',
+                                        onDecrease: () {}, // TODO
+                                        onIncrease: () {}, // TODO
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
                 ),
               ),
             ),
@@ -312,7 +311,8 @@ class _SettingsRow extends StatelessWidget {
     final borderColor = Theme.of(context).colorScheme.outline.withAlpha(80);
 
     // Title font size (5px larger than titleMedium default)
-    final baseTitleSize = Theme.of(context).textTheme.titleMedium?.fontSize ?? 16;
+    final baseTitleSize =
+        Theme.of(context).textTheme.titleMedium?.fontSize ?? 16;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -353,10 +353,7 @@ class _SettingsRow extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: borderColor,
-                  width: 1.5,
-                ),
+                border: Border.all(color: borderColor, width: 1.5),
                 color: Theme.of(context).colorScheme.surface.withAlpha(60),
               ),
               child: Semantics(

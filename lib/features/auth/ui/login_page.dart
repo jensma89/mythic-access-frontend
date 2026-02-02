@@ -1,9 +1,9 @@
 // login_page.dart
 
 import 'package:flutter/material.dart';
-import '../components/app_dark_background.dart';
-import '../components/button.dart';
-import '../components/text_field.dart';
+import '../../../core/components/app_dark_background.dart';
+import '../../../core/components/button.dart';
+import '../../../core/components/text_field.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

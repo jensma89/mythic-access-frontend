@@ -1,9 +1,9 @@
 //main.dart
 import 'package:flutter/material.dart';
-import 'theme/dark_theme.dart';
-import 'pages/login_page.dart';
-import 'pages/start_page.dart';
-import 'pages/signup_page.dart';
+import 'core/theme/dark_theme.dart';
+import 'features/auth/ui/login_page.dart';
+import 'features/home/ui/start_page.dart';
+import 'features/auth/ui/signup_page.dart';
 
 void main() {
   runApp(const MyApp());
