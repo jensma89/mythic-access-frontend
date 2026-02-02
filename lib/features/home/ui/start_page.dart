@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:mythic_access_frontend/core/components/adaptive_scaffold.dart';
 import 'package:mythic_access_frontend/core/components/button.dart';
-import 'package:mythic_access_frontend/components/short_menu_card.dart';
 import '../../../core/components/app_dark_background.dart';
 import '../../../core/components/nav_bar.dart';
 
@@ -106,13 +105,6 @@ class _StartPageState extends State<StartPage> {
                   const Spacer(),
                 ],
               ),
-            ),
-
-            // Short settings card overlay
-            ShortMenuCard(
-              isOpen: _isShortMenuOpen,
-              onClose: _closeShortMenu,
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start),
             ),
           ],
         ),
