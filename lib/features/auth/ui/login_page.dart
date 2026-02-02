@@ -19,10 +19,10 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Text field for username or email adress
+                // Text field for username or email address
                 CustomTextField(
-                  label: 'Username or email address:',
-                  semanticsLabel: 'Username or email address.',
+                  label: 'Username or email address',
+                  semanticsLabel: 'Username or email address',
                   placeholder: 'User123 or user@example.com ...',
                   valueType: ValueType.usernameOrEmail,
                 ),
@@ -30,29 +30,31 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 5),
 
                 CustomTextField(
-                  label: 'Password:',
-                  semanticsLabel: 'Your password.',
-                  placeholder: 'Enter your password...',
+                  label: 'Password',
+                  semanticsLabel: 'Your password',
+                  placeholder: '',
                   valueType: ValueType.password,
                 ),
 
                 const SizedBox(height: 50),
 
+                // Login button
                 PrimaryButton(
                   text: 'Login',
-                  semanticsLabel: 'Login with your account.',
+                  semanticsLabel: 'Login with your account',
                   icon: Icons.login,
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, '/start');
                   },
                 ),
 
-                const SizedBox(height: 10),
+                const SizedBox(height: 24),
 
+                // Signup button
                 PrimaryButton(
                   text: 'Signup',
-                  semanticsLabel: 'Signup new account.',
-                  icon: Icons.app_registration,
+                  semanticsLabel: 'Signup new account',
+                  icon: Icons.create,
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, '/signup');
                   },

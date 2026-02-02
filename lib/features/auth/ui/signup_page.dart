@@ -144,21 +144,12 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(height: 24),
 
               // Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (_step > 0)
-                    SecondaryButton(
-                      text: 'Back',
-                      semanticsLabel: 'Navigate back',
-                      onPressed: _prevStep,
-                      icon: Icons.arrow_back,
-                    ),
-
-                  const SizedBox(width: 12),
-
+                  // Next or create account button
                   PrimaryButton(
-                    text: _step == 2 ? 'Create Account' : 'Next',
+                    text: _step == 2 ? 'Create' : 'Next',
                     icon: _step == 2 ? Icons.check : Icons.arrow_forward,
                     semanticsLabel: _step == 2 ? 'Create account' : 'Next step',
                     onPressed: () {
@@ -169,6 +160,17 @@ class _SignupPageState extends State<SignupPage> {
                       }
                     },
                   ),
+
+                  const SizedBox(height: 24),
+
+                  // Navigate back button
+                  if (_step > 0)
+                    SecondaryButton(
+                      text: 'Back',
+                      semanticsLabel: 'Navigate back',
+                      onPressed: _prevStep,
+                      icon: Icons.arrow_back,
+                    ),
                 ],
               ),
               const Spacer(),
