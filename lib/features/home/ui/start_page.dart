@@ -85,7 +85,7 @@ class _StartPageState extends State<StartPage> {
                       AppButton(
                         text: 'My Profile',
                         semanticsLabel: 'My profile.',
-                        icon: Icons.account_circle,
+                        icon: Icons.person,
                         onPressed: () {
                           print('My profile button pressed.');
                         },
@@ -97,6 +97,25 @@ class _StartPageState extends State<StartPage> {
                         text: 'Settings',
                         semanticsLabel: 'Settings.',
                         icon: Icons.settings,
+                        onPressed: () {},
+                      ),
+
+                      const SizedBox(height: 34),
+
+                      // Button for feedback page
+                      AppButton(
+                        text: 'Feedback',
+                        semanticsLabel: 'Go to feedback page',
+                        icon: Icons.feedback_outlined,
+                        onPressed: () {},
+                      ),
+                      const SizedBox(height: 10),
+
+                      // Button for about/impressum page
+                      AppButton(
+                        text: 'About',
+                        semanticsLabel: 'Go to about page',
+                        icon: Icons.info_outlined,
                         onPressed: () {},
                       ),
                     ],
