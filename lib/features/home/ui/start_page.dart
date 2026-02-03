@@ -7,29 +7,8 @@ import '../../../core/components/app_dark_background.dart';
 import '../../../core/components/nav_bar.dart';
 
 // Class for the start (home) page
-class StartPage extends StatefulWidget {
+class StartPage extends StatelessWidget {
   const StartPage({super.key});
-
-  @override
-  State<StartPage> createState() => _StartPageState();
-}
-
-class _StartPageState extends State<StartPage> {
-  bool _isShortMenuOpen = false;
-
-  void _toggleShortMenu() {
-    setState(() {
-      _isShortMenuOpen = !_isShortMenuOpen;
-    });
-  }
-
-  void _closeShortMenu() {
-    if (_isShortMenuOpen) {
-      setState(() {
-        _isShortMenuOpen = false;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +16,6 @@ class _StartPageState extends State<StartPage> {
       child: AdaptiveScaffold(
         activeItem: NavItem.home,
         homeRedirect: false,
-        onToggleCard: _toggleShortMenu,
-        isCardOpen: _isShortMenuOpen,
         body: Stack(
           children: [
             Center(
@@ -76,9 +53,7 @@ class _StartPageState extends State<StartPage> {
                         text: 'Campaigns',
                         semanticsLabel: 'Go to your campaigns.',
                         icon: Icons.wallpaper,
-                        onPressed: () {
-                          print('Campaign button pressed.');
-                        },
+                        onPressed: () {},
                       ),
                       const SizedBox(height: 15),
 
@@ -88,7 +63,7 @@ class _StartPageState extends State<StartPage> {
                         semanticsLabel: 'My profile.',
                         icon: Icons.person,
                         onPressed: () {
-                          print('My profile button pressed.');
+                          Navigator.pushNamed(context, '/profile');
                         },
                       ),
                       const SizedBox(height: 15),

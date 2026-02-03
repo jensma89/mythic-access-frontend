@@ -32,6 +32,7 @@ class EntityCard extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(5),
       child: Column(
+        // Add Semantics!!!!!!!!!!!!
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(

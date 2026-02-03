@@ -4,6 +4,7 @@ import 'core/theme/dark_theme.dart';
 import 'features/auth/ui/login_page.dart';
 import 'features/home/ui/start_page.dart';
 import 'features/auth/ui/signup_page.dart';
+import 'features/profiles/ui/profile_detail_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         "/login": (context) => const LoginPage(),
         "/start": (context) => const StartPage(),
         "/signup": (context) => const SignupPage(),
+        "/profile": (context) => const ProfilePage(),
       },
       debugShowCheckedModeBanner: false,
     );

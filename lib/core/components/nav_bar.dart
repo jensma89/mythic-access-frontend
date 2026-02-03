@@ -96,7 +96,7 @@ class _TopNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Mythic Access'),
+      title: const Text('Mythic Access', semanticsLabel: 'Mythic Access'),
       actions: [
         // Back button
         _NavButton(
@@ -116,11 +116,11 @@ class _TopNavBar extends StatelessWidget {
           showLabel: true,
         ),
 
-        // Navigation button to show/hide the settings card
+        // Navigation button settings
         _NavButton(
-          icon: Icons.style,
-          label: 'Card',
-          semanticsLabel: 'Show or hide short setting card',
+          icon: Icons.settings,
+          label: 'Settings',
+          semanticsLabel: 'Settings',
           onPressed: onToggleCard,
           showLabel: true,
           active: isCardOpen,
