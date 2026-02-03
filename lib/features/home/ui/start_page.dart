@@ -96,7 +96,6 @@ class StartPage extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   const Spacer(),
                 ],
               ),
