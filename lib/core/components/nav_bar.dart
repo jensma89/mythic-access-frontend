@@ -121,9 +121,8 @@ class _TopNavBar extends StatelessWidget {
           icon: Icons.settings,
           label: 'Settings',
           semanticsLabel: 'Settings',
-          onPressed: onToggleCard,
+          onPressed: () {},
           showLabel: true,
-          active: isCardOpen,
         ),
       ],
     );
@@ -156,6 +155,7 @@ class _BottomNavBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            // Back button (mobile)
             _NavButton(
               icon: Icons.arrow_back,
               label: 'Back',
@@ -163,6 +163,8 @@ class _BottomNavBar extends StatelessWidget {
               onPressed: onBack,
               active: activeItem == NavItem.back,
             ),
+
+            // Home button (mobile)
             _NavButton(
               icon: Icons.home,
               label: 'Home',
@@ -170,12 +172,13 @@ class _BottomNavBar extends StatelessWidget {
               onPressed: onHome,
               active: activeItem == NavItem.home,
             ),
+
+            // Settings button (mobile)
             _NavButton(
-              icon: Icons.style,
+              icon: Icons.settings,
               label: 'Card',
-              semanticsLabel: 'Show or hide quick settings menu',
-              onPressed: onToggleCard,
-              active: isCardOpen,
+              semanticsLabel: 'Settings menu',
+              onPressed: () {},
             ),
           ],
         ),
