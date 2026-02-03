@@ -1,5 +1,6 @@
 //main.dart
 import 'package:flutter/material.dart';
+import 'features/profiles/ui/profile_update_page.dart';
 import 'core/theme/dark_theme.dart';
 import 'features/auth/ui/login_page.dart';
 import 'features/home/ui/start_page.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         "/start": (context) => const StartPage(),
         "/signup": (context) => const SignupPage(),
         "/profile": (context) => const ProfilePage(),
+        "/profile_update": (context) => const ProfileUpdatePage(),
       },
       debugShowCheckedModeBanner: false,
     );

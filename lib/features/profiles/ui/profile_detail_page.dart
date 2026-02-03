@@ -113,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           semanticsLabel: 'Edit your profile',
                           icon: Icons.edit,
                           onPressed: () {
-                            // TODO: open edit profile dialog
+                            Navigator.pushNamed(context, '/profile_update');
                           },
                         ),
                         const SizedBox(height: 12),
@@ -129,7 +129,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ],
                     ),
-                    const Spacer(),
                   ],
                 ),
               ),
