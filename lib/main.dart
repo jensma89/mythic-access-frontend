@@ -1,5 +1,6 @@
 //main.dart
 import 'package:flutter/material.dart';
+import 'package:mythic_access_frontend/features/campaigns/ui/campaign_list_page.dart';
 import 'features/profiles/ui/profile_update_page.dart';
 import 'core/theme/dark_theme.dart';
 import 'features/auth/ui/login_page.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         "/signup": (context) => const SignupPage(),
         "/profile": (context) => const ProfilePage(),
         "/profile_update": (context) => const ProfileUpdatePage(),
+        "/campaigns_list": (context) => const ListCampaignsPage(),
       },
       debugShowCheckedModeBanner: false,
     );

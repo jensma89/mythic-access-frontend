@@ -53,7 +53,9 @@ class StartPage extends StatelessWidget {
                         text: 'Campaigns',
                         semanticsLabel: 'Go to your campaigns.',
                         icon: Icons.wallpaper,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/campaigns_list');
+                        },
                       ),
                       const SizedBox(height: 15),
 

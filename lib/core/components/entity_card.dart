@@ -32,14 +32,13 @@ class EntityCard extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(5),
       child: Column(
-        // Add Semantics!!!!!!!!!!!!
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             title,
             style: Theme.of(
               context,
-            ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+            ).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
           const Divider(),
 
