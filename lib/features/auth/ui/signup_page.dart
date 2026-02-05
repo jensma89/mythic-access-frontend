@@ -173,6 +173,19 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                 ],
               ),
+
+              const SizedBox(height: 34),
+
+              // Cancel Button - redirect to login page
+              SecondaryButton(
+                text: 'Cancel',
+                icon: Icons.cancel_outlined,
+                semanticsLabel: 'Cancel create new account, back to login page',
+                onPressed: () {
+                  Navigator.pushNamed(context, 'login');
+                },
+              ),
+
               const Spacer(),
             ],
           ),
