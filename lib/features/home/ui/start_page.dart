@@ -105,7 +105,8 @@ class StartPage extends StatelessWidget {
                         semanticsLabel: 'Logout',
                         icon: Icons.power_settings_new,
                         onPressed: () {
-                          // TODO: Logout current profile and go to login page
+                          // TODO: Logout current account
+                          Navigator.pushNamed(context, '/login');
                         },
                       ),
                     ],

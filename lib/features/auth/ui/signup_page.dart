@@ -182,7 +182,7 @@ class _SignupPageState extends State<SignupPage> {
                 icon: Icons.cancel_outlined,
                 semanticsLabel: 'Cancel create new account, back to login page',
                 onPressed: () {
-                  Navigator.pushNamed(context, 'login');
+                  Navigator.pushNamed(context, '/login');
                 },
               ),
 
