@@ -16,6 +16,15 @@ class ListCampaignsPage extends StatefulWidget {
 
 class _ListCampaignsPageState extends State<ListCampaignsPage> {
   // Later for API data
+  late final PageController _pageController;
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(viewportFraction: 0.65);
+  }
+
   final List<Map<String, dynamic>> campaigns = [
     {'title': 'Test Campaign', 'genre': 'Fantasy', 'maxClasses': 3},
     {'title': 'Dark Realms', 'genre': 'Dark Fantasy', 'maxClasses': 4},
@@ -34,14 +43,12 @@ class _ListCampaignsPageState extends State<ListCampaignsPage> {
             constraints: const BoxConstraints(
               maxWidth: 900, // For Web / Desktop
             ),
-
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 32,
                   horizontal: 16,
                 ),
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -67,62 +74,120 @@ class _ListCampaignsPageState extends State<ListCampaignsPage> {
                       ),
                     ),
 
-                    // Horizontal side scroll list
-                    SizedBox(
-                      height: 340, // Height of the cards
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        separatorBuilder: (_, _) => const SizedBox(width: 12),
-                        itemCount: campaigns.length,
-                        itemBuilder: (context, index) {
-                          final campaign = campaigns[index];
+                    // Horizontal side scroll list (centered, responsive, selected bigger)
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        final double cardWidth = constraints.maxWidth * 0.6;
+                        final double cardHeight =
+                            cardWidth * 2; // 2:1 height ratio
 
-                          return SizedBox(
-                            width: 280, // Width of the entity cards
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(12),
-                              onTap: () {
-                                // TODO: Navigate to campaign detail page
-                                Navigator.pushNamed(
-                                  context,
-                                  '/campaign_detail',
-                                  arguments: campaign,
+                        return SizedBox(
+                          height: cardHeight,
+                          child: Semantics(
+                            label:
+                                'Campaign list, swipe left or right to choose a campaign',
+                            child: PageView.builder(
+                              controller: _pageController,
+                              itemCount: campaigns.length,
+                              onPageChanged: (index) {
+                                setState(() {
+                                  _selectedIndex = index;
+                                });
+                              },
+                              itemBuilder: (context, index) {
+                                final campaign = campaigns[index];
+                                final bool isSelected = index == _selectedIndex;
+
+                                return Center(
+                                  child: AnimatedScale(
+                                    scale: isSelected ? 1.0 : 0.9,
+                                    duration: const Duration(milliseconds: 200),
+                                    child: SizedBox(
+                                      width: cardWidth,
+                                      height: cardHeight,
+                                      child: InkWell(
+                                        borderRadius: BorderRadius.circular(12),
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                            context,
+                                            '/campaign_detail',
+                                            arguments: campaign,
+                                          );
+                                        },
+                                        child: EntityCard(
+                                          title: campaign['title'],
+                                          content: [
+                                            Text(
+                                              campaign['genre'],
+                                              style: Theme.of(
+                                                context,
+                                              ).textTheme.bodyMedium,
+                                            ),
+                                            const SizedBox(height: 12),
+                                            Text(
+                                              'Max Classes: ${campaign['maxClasses']}',
+                                              style: Theme.of(
+                                                context,
+                                              ).textTheme.bodyMedium,
+                                            ),
+                                          ],
+                                          footer: const SizedBox.shrink(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 );
                               },
-
-                              // Entity cards in list view
-                              child: EntityCard(
-                                title: campaign['title'],
-                                content: [
-                                  // Genre field
-                                  Text(
-                                    campaign['genre'],
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.bodyMedium,
-                                  ),
-                                  const SizedBox(height: 15),
-
-                                  // Max classes field
-                                  Text(
-                                    'Max Classes: ${campaign['maxClasses']}',
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.bodyMedium,
-                                  ),
-                                ],
-                                footer: const SizedBox.shrink(),
-                              ),
                             ),
-                          );
-                        },
+                          ),
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Dropdown for accessible selection (bigger text)
+                    DropdownButtonFormField<int>(
+                      value: _selectedIndex,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium, // selected value
+                      decoration: InputDecoration(
+                        labelText: 'Select Campaign',
+                        labelStyle: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium, // label text
                       ),
+                      items: List.generate(
+                        campaigns.length,
+                        (index) => DropdownMenuItem(
+                          value: index,
+                          child: Text(
+                            campaigns[index]['title'],
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium, // item text
+                          ),
+                        ),
+                      ),
+                      onChanged: (value) {
+                        if (value == null) return;
+
+                        setState(() {
+                          _selectedIndex = value;
+                        });
+
+                        _pageController.animateToPage(
+                          value,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeOut,
+                        );
+                      },
                     ),
 
                     const SizedBox(height: 32),
 
                     // Button area
-                    // Button to create campaign
                     PrimaryButton(
                       text: 'Create New',
                       semanticsLabel: 'Create a new campaign',
