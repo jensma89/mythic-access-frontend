@@ -29,24 +29,27 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
       child: AdaptiveScaffold(
         activeItem: null,
         homeRedirect: true,
-        body: Center(
+        body: Align(
+          alignment: Alignment.topCenter,
           child: ConstrainedBox(
             constraints: const BoxConstraints(
               maxWidth: 900, // For Web / Desktop
             ),
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 32,
-                  horizontal: 16,
+                padding: const EdgeInsets.only(
+                  bottom: 32,
+                  left: 16,
+                  right: 16,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // Title - top
                     SafeArea(
+                      bottom: false,
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 24),
+                        padding: const EdgeInsets.only(top: 38, bottom: 24),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
