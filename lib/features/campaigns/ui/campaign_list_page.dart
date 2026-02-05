@@ -77,9 +77,11 @@ class _ListCampaignsPageState extends State<ListCampaignsPage> {
                     // Horizontal side scroll list (centered, responsive, selected bigger)
                     LayoutBuilder(
                       builder: (context, constraints) {
+                        final bool isDesktop = constraints.maxWidth > 600;
                         final double cardWidth = constraints.maxWidth * 0.6;
+                        final double maxCardHeight = isDesktop ? 400 : 300;
                         final double cardHeight =
-                            cardWidth * 2; // 2:1 height ratio
+                            (cardWidth * 1.4).clamp(0, maxCardHeight);
 
                         return SizedBox(
                           height: cardHeight,
@@ -184,10 +186,22 @@ class _ListCampaignsPageState extends State<ListCampaignsPage> {
                         );
                       },
                     ),
-
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 15),
 
                     // Button area
+                    // Button to show selected campaign
+                    AppButton(
+                      text: 'Details',
+                      icon: Icons.info_outline,
+                      semanticsLabel: 'Show details from selected campaign',
+                      onPressed: () {
+                        // TODO: go to selected campaign
+                      },
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Create new campaign
                     PrimaryButton(
                       text: 'Create New',
                       semanticsLabel: 'Create a new campaign',
