@@ -94,6 +94,18 @@ class StartPage extends StatelessWidget {
                         icon: Icons.info_outlined,
                         onPressed: () {},
                       ),
+
+                      // Button for logout
+                      const SizedBox(height: 34),
+
+                      SecondaryButton(
+                        text: 'Logout',
+                        semanticsLabel: 'Logout',
+                        icon: Icons.power_settings_new,
+                        onPressed: () {
+                          // TODO: Logout current profile and go to login page
+                        },
+                      ),
                     ],
                   ),
                   const Spacer(),

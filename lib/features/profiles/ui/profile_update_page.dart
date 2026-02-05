@@ -19,7 +19,8 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
   // Later for API Data
   String username = 'MythicUser';
   String email = 'user@mythic-access.com';
-  String role = 'Adventurer';
+  String password = 'test12345';
+  String created = '2026/02/01';
 
   // Update user data content
   @override
@@ -105,17 +106,17 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
                     ),
                     const SizedBox(height: 14),
 
-                    // Update role card
+                    // Update password card
                     EntityCard(
-                      title: 'Role',
+                      title: 'Password',
                       content: [
                         Column(
                           children: [
                             CustomTextField(
-                              label: role,
-                              semanticsLabel: 'role: $role',
-                              placeholder: 'New role...',
-                              valueType: ValueType.string,
+                              label: password,
+                              semanticsLabel: 'role: $password',
+                              placeholder: 'New password...',
+                              valueType: ValueType.password,
                             ),
                           ],
                         ),
@@ -134,7 +135,8 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
                           semanticsLabel: 'Save your profile changes',
                           icon: Icons.save_alt_outlined,
                           onPressed: () {
-                            // TODO: add changes saved dialog and save data + redirect
+                            // TODO: add changes saved dialog
+                            //  (confirm with password) and save data + redirect
                           },
                         ),
                         const SizedBox(height: 12),

@@ -18,7 +18,8 @@ class _ProfilePageState extends State<ProfilePage> {
   // Later for API Data
   String username = 'MythicUser';
   String email = 'user@mythic-access.com';
-  String role = 'Adventurer';
+  String password = 'test12345';
+  String created = '2026/02/01';
 
   // Content (user me data) in entity cards
   @override
@@ -90,12 +91,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     const SizedBox(height: 12),
 
-                    // Role card
+                    // Created at card
                     EntityCard(
-                      title: 'Role',
+                      title: 'Created at',
                       content: [
                         Text(
-                          role,
+                          created,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
